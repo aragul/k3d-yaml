@@ -1,0 +1,45 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: my-web-deployment-replicas
+  labels:
+    app  : my-k8s-application
+    env  : prod
+    owner: EvgenySamsonov
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      project: kgb
+  template:
+    metadata:
+      labels:
+        project: kgb
+    spec:
+      containers:
+        - name: kgb-web
+          image: adv4000/k8sphp:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-single-pod-service
+  labels:
+    env  : prod
+    owner: SamsonovEvgeny 
+spec:
+  selector:
+    project: kgb
+  ports:
+  - name      : app-listener
+    protocol  : TCP
+    port      : 80
+    targetPort: 80
+  type: LoadBalancer
