@@ -6,8 +6,6 @@ metadata:
     env  : prod
     app  : main
     tier : frontend
-    owner: SamsonovEvgeny
-
 spec:
   containers:
     - name: container-web
