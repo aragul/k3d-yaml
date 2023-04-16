@@ -41,7 +41,6 @@ metadata:
   name: my-multi-pods-service
   labels:
     env  : prod
-    owner: SamsonovEvgeny 
 spec:
   type: LoadBalancer
   selector:
